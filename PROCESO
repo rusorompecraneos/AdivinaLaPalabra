@@ -91,7 +91,7 @@ class AdivinaPalabra{
     string AdivinaPalabra:: AsignarCategoria(){
         int opcionDeCategoria;
         list<string> categorias;
-        categorias = {"Pincipiante", "Amateur", "Profesional"};
+        categorias = {"Pincipiante", "Normal", "Profesional"};
 
         cout << " Elige la categoria que quieres jugar: \n 1. Principiante \n 2. Normal \n 3. Profesional " << endl;
         cin >> opcionDeCategoria;
