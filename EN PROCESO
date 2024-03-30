@@ -2,121 +2,143 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <algorithm>
 
 using namespace std;
 
-class AdivinaPalabra{
-
-    //Atributos:
+class AdivinaPalabra {
+    // Atributos:
     string nombre;
     int cantidadJugadores;
     string categorias;
     string desarrollador;
-    int añoLanzamiento;
-    string plataforma; 
-    
-    public:
-    AdivinaPalabra(){}  //Constructor Vacio.
+    int añoLanzamiento = 2014;
+    string plataforma;
 
+public:
+    AdivinaPalabra() {} // Constructor Vacio.
 
     // Los sets:
-    void setnombre(string nombre){
+    void setnombre(string nombre) {
         this->nombre = nombre;
     }
-    void setcantidadJugadores(int cantidadJugadores){
+    void setcantidadJugadores(int cantidadJugadores) {
         this->cantidadJugadores = cantidadJugadores;
     }
-    void setdesarrollador(string desarrollador){
+    void setdesarrollador(string desarrollador) {
         this->desarrollador = desarrollador;
     }
-    void setplataforma(string plataforma){
+    void setplataforma(string plataforma) {
         this->plataforma = plataforma;
     }
-    void setañoLanzamiento(int añoLanzamiento){
+    void setañoLanzamiento(int añoLanzamiento) {
         this->añoLanzamiento = añoLanzamiento;
     }
-    void setcategoria(string categorias){
+    void setcategoria(string categorias) {
         this->categorias = categorias;
     }
 
-    //Los gets:
-    string getnombre(){
+    // Los gets:
+    string getnombre() {
         return nombre;
     }
-    int getcantidadJugadores(){
+    int getcantidadJugadores() {
         return cantidadJugadores;
     }
-    string getdesarrollador(){
+    string getdesarrollador() {
         return desarrollador;
     }
-    string getplataforma(){
+    string getplataforma() {
         return plataforma;
     }
-    int getañoLanzamiento(){
+    int getañoLanzamiento() {
         return añoLanzamiento;
     }
-    string getcategorias(){
+    string getcategorias() {
         return categorias;
     }
 
-
     // Declaracion de funciones:
-    void AgregarAColeccion();  // HECHA
-    string AsignarCategoria();   // HECHA, REQUIERE MODIFICACION
-    string VideojuegosPorTitulo(); // EN PROCESO
+    void AgregarAColeccion();
+    string AsignarCategoria();
+    string VideojuegosPorTitulo();
     int VideojuegosPorAñoLanzamiento();
     string VideojuegosPorPlataforma();
     void Ordenamiento();
+};
 
-    };
-
-    void AdivinaPalabra::AgregarAColeccion(){
-        list<string> coleccionDeFavoritos;
+void AdivinaPalabra::AgregarAColeccion() {
+    list<string> coleccionDeFavoritos;
     string desicionUsuario;
 
-        cout << "Bienvenido, a su coleccion de videojuegos, si desea agregar un videojuego a su coleccion,\n indique el numero del videojuego que desea agregar a continuacion:" << endl;
-        cout << "1. Adivina la palabra" << endl;
-        cout << "2. Adivina el animal" << endl;
-        cout << "3. Adivina la profesion" << endl;
-        cin >> desicionUsuario;
+    cout << "Bienvenido, a su coleccion de videojuegos, si desea agregar un videojuego a su coleccion,\n indique el numero del videojuego que desea agregar a continuacion:" << endl;
+    cout << "1. Adivina la palabra" << endl;
+    cout << "2. Adivina el animal" << endl;
+    cout << "3. Adivina la profesion" << endl;
+    cin >> desicionUsuario;
 
-        coleccionDeFavoritos.push_back(desicionUsuario);
+    coleccionDeFavoritos.push_back(desicionUsuario);
 
-        cout << "Su nueva coleecion de favoritos es  " << coleccionDeFavoritos.size() << endl;
+    cout << "Su nueva coleecion de favoritos es " << coleccionDeFavoritos.size() << endl;
+}
+
+string AdivinaPalabra::AsignarCategoria() {
+    string desicionCategoria;
+    list<string> categorias = {"Principiante", "Amateur", "Profesional"};
+
+    cout << "Por favor escoja su categoria: 1. Principiante  2. Amateur  3. Profesional" << endl;
+    cin >> desicionCategoria;
+
+    cout << "Su categoria es " << desicionCategoria << endl;
+
+    return desicionCategoria;
+}
+
+string AdivinaPalabra::VideojuegosPorTitulo() {
+    list<string> listaVideojuegos = {"Adivina la palabra", "Adivina el animal", "Adivina la profesion"};
+
+    listaVideojuegos.sort();
+
+    for (const auto& videojuego : listaVideojuegos) {
+        cout << videojuego << endl;
     }
 
-    string AdivinaPalabra:: AsignarCategoria(){
-        int desicionCategoria;
-        list<string> categorias;
-        categorias = {"Pincipiante", "Amateur", "Profesional"};
+    return " "; // Retorna un string vacío, ajusta según sea necesario
+}
 
-        cout << "Por favor escoja su categoria: 1. Principiante  2. Amateur  3. Profesional" << endl;
-        cin >> desicionCategoria;
+int AdivinaPalabra::VideojuegosPorAñoLanzamiento() {
+    // Implementación pendiente
+    return 0;
+}
 
-        cout << "Su categoria es " << desicionCategoria << endl;
+string AdivinaPalabra::VideojuegosPorPlataforma() {
+    // Implementación pendiente
+    return "";
+}
 
-    }
+void AdivinaPalabra::Ordenamiento() {
+    // Implementación pendiente
+}
 
-    string VideojuegosPorTitulo(){
+class AdivinaAnimal : public AdivinaPalabra{
+    AdivinaPalabra objeto1;
 
-    }
+    public:
+    AdivinaAnimal(){};
 
+};
+class AdivinaProfesion : public AdivinaPalabra{
+        AdivinaPalabra objeto2;
 
-
-    class AdivinaAnimal : public AdivinaPalabra{
-        AdivinaPalabra objeto1;
-
-        //Atributos 
-        public: 
-        string nombre;
-        int cantidadJugadores;
-        string categorias;
-        string desarrollador;
-        int añoLanzamiento;
-        string plataforma; 
-
-        AdivinaAnimal(){};
+        // ATRIBUTOS 
+        public:
+        AdivinaProfesion(){};
     
+};
+
+int main() {
+
+}
 
     };
 int main(){
