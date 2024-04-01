@@ -163,6 +163,58 @@ class AdivinaProfesion : public AdivinaPalabra{
     
 };
 
+//PUNTO 4, REQUIERE UNA REVISION. 
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+
+using namespace std;
+
+int main(){
+    int desicionJugador;
+    string desicionFavoritos;
+    
+    list<string> listaVideojuegos = {"Adivina la palabra", "Adivina el animal", "Adivina la profesion"};
+    
+    cout << "Para usar el jugador 1, pulsa el numero 1" << endl;
+    cout << "Para usar el jugador 2, pulsa el numero 2" << endl;
+    cin >> desicionJugador;
+
+    if (desicionJugador == 1){
+        cout << "Usted ha seleccionado el jugador uno \n" << endl;
+
+        cout << "A continuacion indique el nombre de su juego favorito " << endl;
+        cout << "1. Adivina la palabra" << endl;
+        cout << "2. Adivina el animal" << endl;
+        cout << "3. Adivina la profesion" << endl;
+        cin >> desicionFavoritos;
+
+
+    list<string> juegosFavoritos ={};
+
+    juegosFavoritos.push_back(desicionFavoritos);
+
+    cout << "Su nueva coleecion es " << juegosFavoritos.size() << endl;
+}
+    
+    if (desicionJugador == 2){
+        cout << "Usted ha seleccionado el jugador dos" << endl;
+        cout << "A continuacion indique el nombre de su juego favorito " << endl;
+        cout << "1. Adivina la palabra" << endl;
+        cout << "2. Adivina el animal" << endl;
+        cout << "3. Adivina la profesion" << endl;
+        cin >> desicionFavoritos;
+
+
+    list<string> juegosFavoritos ={};
+
+    juegosFavoritos.push_back(desicionFavoritos);
+
+    cout << "Su nueva coleecion es " << juegosFavoritos.size() << endl;
+}
+}
+
 int main() {
 
 }
