@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/ippol/OneDrive/Escritorio/parcial 1/AdivinaNombre",
-      "program": "c:/Users/ippol/OneDrive/Escritorio/parcial 1/AdivinaNombre/build/Debug/outDebug",
+      "cwd": "c:/Users/ippol/OneDrive/Escritorio/UNIVERSIDAD/II SEMESTRE/Algoritmos/PARCIAL 2/AdivinaNombre",
+      "program": "c:/Users/ippol/OneDrive/Escritorio/UNIVERSIDAD/II SEMESTRE/Algoritmos/PARCIAL 2/AdivinaNombre/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

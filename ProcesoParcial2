@@ -1,0 +1,242 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+
+using namespace std;
+
+// CLASE PRINCIPAL 
+class AdivinaPalabra{
+
+    // ATRIBUTOS 
+    string nombre;
+    string categorias;
+    string desarrollador;
+    string plataforma; 
+    string juegoMasJugado;
+    int anioLanzamiento;
+    int cantidadDeJugadores;
+    int tiempoDeJuego; 
+
+    
+    
+    // CONSTRUCTOR VACIO 
+    AdivinaPalabra(){}  
+
+    // SET
+    void setnombre(string nombre){
+        this->nombre = nombre;
+    }
+    void setcategoria(string categorias){
+        this->categorias = categorias;
+    }
+    void setdesarrollador(string desarrollador){
+        this->desarrollador = desarrollador;
+    }
+    void setplataforma(string plataforma){
+        this->plataforma = plataforma;
+    }
+    void setjuegoMasJugado(string juegoMasJugado){
+        this->juegoMasJugado = juegoMasJugado;
+    }
+    void setanioLanzamiento(int anioLanzamiento){
+        this->anioLanzamiento = anioLanzamiento;
+    }
+    void setcantidadJugadores(int cantidadDeJugadores){
+        this->cantidadDeJugadores = cantidadDeJugadores;
+    }
+    void settiempoDeJuego(int tiempoDeJuego){
+        this->tiempoDeJuego = tiempoDeJuego;
+    }
+    
+
+    // GET 
+    string getnombre(){
+        return nombre;
+    }
+    string getcategorias(){
+        return categorias;
+    }
+    string getdesarrollador(){
+        return desarrollador;
+    }
+    string getplataforma(){
+        return plataforma;
+    }
+    string getjuegoMasJugado(){
+        return juegoMasJugado;
+    }
+    int getanioLanzamiento(){
+        return anioLanzamiento;
+    }
+    int getcantidadDeJugadores(){
+        return cantidadDeJugadores;
+    }
+    int gettiempoDeJuego(){
+        return timepoDeJuego;
+    }
+
+
+    // FUNCIONES 
+    void AgregarAColeccion();  
+    string AsignarCategoria();   
+    string PorTitulo(); 
+    string PorPlataforma();
+    int PorAnioLanzamiento();
+    void OrdenadorJuegoMasJugado();
+    void OrdenadorTiempoDeJuego();
+    void OrdenadorNombreJugador();
+
+    };
+
+    // Ordenar por coleccion 
+    void AdivinaPalabra::AgregarAColeccion(){
+        list<string> coleccionDeFavoritos;
+    string opcionUsuario;
+
+        cout << " Indique el número del videojuego que quiere agregar a la colección: \n" << endl;
+        cout << "1. Adivina palabra. " << endl;
+        cout << "2. Adivina animal. " << endl;
+        cout << "3. Adivina profesion. " << endl;
+        cin >> opcionUsuario;
+
+        coleccionDeFavoritos.push_back(opcionUsuario);
+
+        cout << " La colección de favoritos es:  " << coleccionDeFavoritos.size  << "." << endl;
+    }
+
+    // Ordenar por categoria
+    string AdivinaPalabra:: AsignarCategoria(){
+        int opcionDeCategoria;
+        list<string> categorias;
+        categorias = {"Principiante", "Normal", "Profesional"};
+
+        cout << " Elige la categoria que quieres jugar: \n 1. Principiante \n 2. Normal \n 3. Profesional " << endl;
+        cin >> opcionDeCategoria;
+
+    }
+
+    // Ordenar por titulo 
+    string AdivinaPalabra::PorTitulo(){
+        bool comparacionDeTitulo(const AdivinaPalabra& v1, const AdivinaPalabra& v2){
+            return v1.getnombre() < v2.getnombre();
+        }
+        void OrdenarPorTitulo(vector<AdivinaPalabra>& juegos){
+            sort(juegos.begin(), juegos.end(), comparacionDeTitulo);
+        }
+        int main(){
+            vector<AdivinaPalabra> juegos; 
+            juegos.push_back(AdivinaPalabra("AdivinaPalabra"));
+            juegos.push_back(AdivinaPalabra("AdivinaAnimal"));
+            juegos.push_back(AdivinaPalabra("AdivinaProfesion"));
+
+            OrdenarPorTitulo(juegos);
+            cout << "Los videojuegos ordenados por titulo: " << endl;
+            for (const auto& juego : juegos){
+                cout << " " << juego.getnombre() << endl;
+            }
+            return 0;
+        }
+    }
+
+    // Ordenar por plataforma
+    string AdivinaPalabra::PorPlataforma(){
+        map<string, set<Juegos>> 
+        listaPorPlataforma.sort();
+            for (const set<Juegos>& juegos){
+                cout << juegos << endl;
+            }
+
+    }
+
+    // Ordenar por año de lanzamiento
+    int AdivinaPalabra:: PorAnioLanzamiento(){
+        map<int, set<Juegos>> 
+        listaPorAnioLanzamiento.sort();
+            for (const auto& juegos : Juegos){
+                listaPorAnioLanzamiento[juego.getAnioLanzamiento()].insert(juego);
+            }
+
+    }
+
+    // Ordenar por juego mas usado (FALTA!!!)
+
+    // Ordenar por tiempo de juego (REVISAR!!!!)
+    void OrdenadorJuegoMasJugado();
+    bool CompararTiempo (const AdivinaPalabra& v1, const AdivinaPalabra& v2){
+        return v1.gettiempoDeJuego() < v2.gettiempoDeJuego(); 
+    }
+    void ordenarJuegoPorTiempo(vector<AdivinaPalabra>& juegos){
+        sort(juegos.begin(), juegos.end(), CompararPorTiempo);
+    }
+    int main(){
+        vector<AdivinaPalabra> juegos; 
+        juegos.push_back(AdivinaPalabra("Adivina la palabra", AdivinaPalabra, 155)); 
+        juegos.push_back(AdivinaPalabra("Adivina el animal", AdivinaAnimal, 180));
+        juegos.push_back(AdivinaPalabra("Adivina la profesión", AdivinaProfesion, 143));
+
+        ordenarJuegoPorTiempo(juegos); 
+        cout << "Los juegos ordenados de menor a mayor tiempo: " << endl; 
+            for (const auto& juego : juegos){ 
+                cout << " El orden de los juegos " << juego.getnombre() << " es de " << juego.gettiempoDeJuego() << " minutos. " << endl;
+            }
+        return 0;
+    }
+
+    // Ordenar por nombre de jugador (FALTA!!!)
+
+
+// CLASE HIJA 2 (Adivina la profesion con las pistas de cada uno )
+    class AdivinaProfesion : public AdivinaPalabra{
+    AdivinaProfesion(){};
+        AdivinaPalabra objeto1;
+        list<string> listaDeProfesion = {"Médico", "Bombero", "Policía", "Profesor", "Pintor"};
+        list<string> listaDePistas = {"Cura a las personas", "Apaga los incendios", "Atrapa a las personas malas y criminales", "Enseña y educa a los niños", "Crea arte en un lienzo";}
+        list<pair<string, string>> 
+        asociarElementos.sort();
+            for (string i=0; i < listaDePistas.size(); i++){
+                cout << listaDePistas[i] << "es la pista de" << listaDeProfesion[i] << endl;
+            }
+            return 0;
+    };
+
+
+// LISTA MULTILISTA (REVISAR!!!!)
+    class ListaMultilista{ 
+        private: 
+            map<string, vector<AdivinaPalabra>>;
+            listaMultilista.sort()
+        public:
+            void sumarJuegos(const AdivinaPalabra& juego){
+                listaMultilista[AdivinaPalabra.getcategorias()].push_back(juego);
+            }
+            vector<AdivinaPalabra>;
+            tenerCategoriaAdivinaPalabra(const string& categorias){
+                if (listaMultilisra.find(categorias) != listaMultilista.end()){
+                    return listaMultilista[categorias];
+                } else {
+                    return {};
+                }
+            }
+
+
+    }; 
+    int main(){
+        listaMultilista.sumarJuegos(AdivinaPalabra(AdivinaAnimal));
+        listaMultilista.sumarJuegos(AdivinaPalabra(AdivinaProfesion));
+
+        cout << "se eligió el juego: " << AdivinaAnimal << endl;
+        vector<AdivinaPalabra> juegoAdivinaAnimal = listaMultilista.tenerCategoriaAdivinaPalabra(AdivinaAnimal);
+        for (const auto& juego : juegoAdivinaAnimal){
+            cout << " " << juego.getnombre() << endl;
+        }
+        cout << "se eligió el juego: " << AdivinaProfesion << endl;
+        vector<AdivinaPalabra> juegoAdivinaProfesion = listaMultilista.tenerCategoriaAdivinaPalabra(AdivinaProfesion);
+        for (const auto& juego : juegoAdivinaProfesion){
+            cout << " " << juego.getnombre() << endl;
+        }
+        return 0;
+    };
+
+
+// FALTA EL PUNTO 4 (CRISTIAN) Y REVISAR LO QUE FALTA 
