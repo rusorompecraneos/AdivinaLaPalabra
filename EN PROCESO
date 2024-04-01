@@ -3,6 +3,7 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -120,27 +121,48 @@ void AdivinaPalabra::Ordenamiento() {
     // Implementación pendiente
 }
 
+//CLASE HIJA 1
 class AdivinaAnimal : public AdivinaPalabra{
-    AdivinaPalabra objeto1;
 
-    public:
-    AdivinaAnimal(){};
+     AdivinaPalabra objeto1;
+    list<string> listaAnimales = {"Gato", "Perro", "Caballo", "Leon", "Pajaro"};
+    list<string> listaPistas = {"Es un animal domestoco, muy reservado", "Es el mejor amigo del hombre", "Es un animal usado en batalla", "Es el rey de la selva", "Puede volar"};
+    // Crear un mapa para asociar animales con sus pistas
+    map<string> mapaAnimalesPistas;
 
+    public: 
+    AdivinaAnimal() {
+        // Inicialización del mapa aquí
+        auto itAnimal = listaAnimales.begin();
+        auto itPista = listaPistas.begin();
+        while (itAnimal != listaAnimales.end() && itPista != listaPistas.end()){
+            mapaAnimalesPistas[*itAnimal] = *itPista;       //Correccion pendiente
+            ++itAnimal;
+            ++itPista;
+        }
+    }
 };
+//CLASE HIJA 2
 class AdivinaProfesion : public AdivinaPalabra{
         AdivinaPalabra objeto2;
+        list<string> listaProfesiones = {"Policia", "Doctor", "Bombero", "DJ", "Veterinario"};
+        list<string> listaPistas2 = {"Deben proteger a las personas", "Salvan vidas", "Algo se quema...", "Hacen bailar a los demas", "Hace la vida animal mas feliz"};
 
-        // ATRIBUTOS 
-        public:
-        AdivinaProfesion(){};
+        map<string> mapaProfesionesPistas;
+        public: 
+        AdivinaProfesion() {
+        // Inicialización del mapa aquí
+        auto itProfesion = listaProfesiones.begin();
+        auto itPista = listaPistas2.begin();
+        while (itProfesion != listaProfesiones.end() && itPista != listaPistas2.end()){
+            mapaProfesionesPistas[*itProfesion] = *itPista;  //Correccion pendiente
+            ++Profesion;
+            ++itPista;
+        }
+    }
     
 };
 
 int main() {
-
-}
-
-    };
-int main(){
 
 }
