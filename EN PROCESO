@@ -4,6 +4,7 @@
 #include <list>
 #include <algorithm>
 #include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -69,7 +70,7 @@ public:
 };
 
 void AdivinaPalabra::AgregarAColeccion() {
-    list<string> coleccionDeFavoritos;
+    list<string> coleccion;
     string desicionUsuario;
 
     cout << "Bienvenido, a su coleccion de videojuegos, si desea agregar un videojuego a su coleccion,\n indique el numero del videojuego que desea agregar a continuacion:" << endl;
@@ -78,13 +79,14 @@ void AdivinaPalabra::AgregarAColeccion() {
     cout << "3. Adivina la profesion" << endl;
     cin >> desicionUsuario;
 
-    coleccionDeFavoritos.push_back(desicionUsuario);
+    coleccion.push_back(desicionUsuario);
 
-    cout << "Su nueva coleecion de favoritos es " << coleccionDeFavoritos.size() << endl;
+    cout << "Su nueva coleecion es " << coleccion.size() << endl;
 }
 
 string AdivinaPalabra::AsignarCategoria() {
     string desicionCategoria;
+    list<string> listaJuegos = {"Adivina la palabra", "Adivina el animal", "Adivina la profesion"};
     list<string> categorias = {"Principiante", "Amateur", "Profesional"};
 
     cout << "Por favor escoja su categoria: 1. Principiante  2. Amateur  3. Profesional" << endl;
@@ -104,7 +106,7 @@ string AdivinaPalabra::VideojuegosPorTitulo() {
         cout << videojuego << endl;
     }
 
-    return " "; // Retorna un string vacío, ajusta según sea necesario
+    return " "; 
 }
 
 int AdivinaPalabra::VideojuegosPorAñoLanzamiento() {
@@ -122,98 +124,44 @@ void AdivinaPalabra::Ordenamiento() {
 }
 
 //CLASE HIJA 1
-class AdivinaAnimal : public AdivinaPalabra{
-
-     AdivinaPalabra objeto1;
+class AdivinaAnimal : public AdivinaPalabra {
     list<string> listaAnimales = {"Gato", "Perro", "Caballo", "Leon", "Pajaro"};
-    list<string> listaPistas = {"Es un animal domestoco, muy reservado", "Es el mejor amigo del hombre", "Es un animal usado en batalla", "Es el rey de la selva", "Puede volar"};
-    // Crear un mapa para asociar animales con sus pistas
-    map<string> mapaAnimalesPistas;
+    list<string> listaPistas = {"Es un animal domestico, muy reservado", "Es el mejor amigo del hombre", "Es un animal usado en batalla", "Es el rey de la selva", "Puede volar"};
+    unordered_map<string, string> mapaAnimalesPistas;
 
-    public: 
+public:
     AdivinaAnimal() {
-        // Inicialización del mapa aquí
         auto itAnimal = listaAnimales.begin();
         auto itPista = listaPistas.begin();
-        while (itAnimal != listaAnimales.end() && itPista != listaPistas.end()){
-            mapaAnimalesPistas[*itAnimal] = *itPista;       //Correccion pendiente
+        while (itAnimal != listaAnimales.end() && itPista != listaPistas.end()) {
+            mapaAnimalesPistas[*itAnimal] = *itPista;
             ++itAnimal;
             ++itPista;
         }
     }
 };
-//CLASE HIJA 2
-class AdivinaProfesion : public AdivinaPalabra{
-        AdivinaPalabra objeto2;
-        list<string> listaProfesiones = {"Policia", "Doctor", "Bombero", "DJ", "Veterinario"};
-        list<string> listaPistas2 = {"Deben proteger a las personas", "Salvan vidas", "Algo se quema...", "Hacen bailar a los demas", "Hace la vida animal mas feliz"};
 
-        map<string> mapaProfesionesPistas;
-        public: 
-        AdivinaProfesion() {
-        // Inicialización del mapa aquí
-        auto itProfesion = listaProfesiones.begin();
-        auto itPista = listaPistas2.begin();
-        while (itProfesion != listaProfesiones.end() && itPista != listaPistas2.end()){
-            mapaProfesionesPistas[*itProfesion] = *itPista;  //Correccion pendiente
-            ++Profesion;
-            ++itPista;
+//CLASE HIJA 2
+class AdivinaProfesion : public AdivinaPalabra {
+    unordered_map<string, string> mapaProfesionesPistas = {
+        {"Policia", "Deben proteger a las personas"},
+        {"Doctor", "Salvan vidas"},
+        {"Bombero", "Algo se quema..."},
+        {"DJ", "Hacen bailar a los demas"},
+        {"Veterinario", "Hace la vida animal mas feliz"}
+    };
+
+public:
+    void mostrarPista(const string& profesion) {
+        auto it = mapaProfesionesPistas.find(profesion);
+        if (it != mapaProfesionesPistas.end()) {
+            cout << "La pista para " << profesion << " es: " << it->second << endl;
+        } else {
+            cout << "Profesión no encontrada." << endl;
         }
     }
-    
 };
 
-//PUNTO 4, REQUIERE UNA REVISION. 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <list>
-
-using namespace std;
-
-int main(){
-    int desicionJugador;
-    string desicionFavoritos;
-    
-    list<string> listaVideojuegos = {"Adivina la palabra", "Adivina el animal", "Adivina la profesion"};
-    
-    cout << "Para usar el jugador 1, pulsa el numero 1" << endl;
-    cout << "Para usar el jugador 2, pulsa el numero 2" << endl;
-    cin >> desicionJugador;
-
-    if (desicionJugador == 1){
-        cout << "Usted ha seleccionado el jugador uno \n" << endl;
-
-        cout << "A continuacion indique el nombre de su juego favorito " << endl;
-        cout << "1. Adivina la palabra" << endl;
-        cout << "2. Adivina el animal" << endl;
-        cout << "3. Adivina la profesion" << endl;
-        cin >> desicionFavoritos;
-
-
-    list<string> juegosFavoritos ={};
-
-    juegosFavoritos.push_back(desicionFavoritos);
-
-    cout << "Su nueva coleecion es " << juegosFavoritos.size() << endl;
-}
-    
-    if (desicionJugador == 2){
-        cout << "Usted ha seleccionado el jugador dos" << endl;
-        cout << "A continuacion indique el nombre de su juego favorito " << endl;
-        cout << "1. Adivina la palabra" << endl;
-        cout << "2. Adivina el animal" << endl;
-        cout << "3. Adivina la profesion" << endl;
-        cin >> desicionFavoritos;
-
-
-    list<string> juegosFavoritos ={};
-
-    juegosFavoritos.push_back(desicionFavoritos);
-
-    cout << "Su nueva coleecion es " << juegosFavoritos.size() << endl;
-}
-}
 
 int main() {
 
