@@ -141,29 +141,6 @@ public:
     }
 };
 
-//CLASE HIJA 2
-class AdivinaProfesion : public AdivinaPalabra {
-    unordered_map<string, string> mapaProfesionesPistas = {
-        {"Policia", "Deben proteger a las personas"},
-        {"Doctor", "Salvan vidas"},
-        {"Bombero", "Algo se quema..."},
-        {"DJ", "Hacen bailar a los demas"},
-        {"Veterinario", "Hace la vida animal mas feliz"}
-    };
-
-public:
-    void mostrarPista(const string& profesion) {
-        auto it = mapaProfesionesPistas.find(profesion);
-        if (it != mapaProfesionesPistas.end()) {
-            cout << "La pista para " << profesion << " es: " << it->second << endl;
-        } else {
-            cout << "Profesión no encontrada." << endl;
-        }
-    }
-};
-
-
-
 //punto 4, requiere un pequeño ajuste pero ya en escencia, ya esta hecho. 
 int desicionJugador;
     string desicionFavoritos;
