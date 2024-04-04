@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <list>
-#include <algorithm>
 #include <map>
 #include <unordered_map>
 
@@ -10,12 +9,14 @@ using namespace std;
 
 class AdivinaPalabra {
     // Atributos:
-    string nombre;
-    int cantidadJugadores;
+    string nombre = "Adivina la Palabra";
     string categorias;
-    string desarrollador;
-    int añoLanzamiento = 2014;
-    string plataforma;
+    string desarrollador = "PLay stations";
+    string plataforma = "Juegos friv"; 
+    string juegoMasJugado;
+    int añoLanzamiento = 2023;
+    int cantidadJugadores;
+    int tiempoDeJuego; 
 
 public:
     AdivinaPalabra() {} // Constructor Vacio.
@@ -39,6 +40,12 @@ public:
     void setcategoria(string categorias) {
         this->categorias = categorias;
     }
+    void settiempoDeJuego(int tiempoDeJuego){
+        this->tiempoDeJuego = tiempoDeJuego;
+    }
+    void setjuegoMasJugado(string juegoMasJugado){
+        this->juegoMasJugado = juegoMasJugado;
+    }
 
     // Los gets:
     string getnombre() {
@@ -59,95 +66,105 @@ public:
     string getcategorias() {
         return categorias;
     }
+    string getjuegoMasJugado(){
+        return juegoMasJugado;
+    }
+    int gettiempoDeJuego(){
+        return tiempoDeJuego;
+    }
 
     // Declaracion de funciones:
     void jugarAdivinaPalabra();
     void AgregarAColeccion();
     string AsignarCategoria();
-    string VideojuegosPorTitulo();
-    int VideojuegosPorAñoLanzamiento();
-    string VideojuegosPorPlataforma();
-    void Ordenamiento();
+    string PorTitulo();
+    int PorAñoLanzamiento();
+    string PorPlataforma();
+    void JugarAdivinaProfesion();
+    void ejecutarMenu();
+    string listaDeFavoritos();
+    void OrdenadorJuegoMasJugado();
 
-    void jugarAdivinaPalabra(){
-        // Inicializa el generador de números aleatorios
-        srand(time(NULL));
-
-    list<string> listaAdivinaPalabra;
-    list<string> listaAdivinaPistas;
-    listaAdivinaPalabra = {"multilistas", "Herencia","Arreglos", "Punteros", "Atributos" };
-    listaAdivinaPistas = {"permite accesar la información de manera ordenada a través de campos claves", "Que una clase hija tome los atributos y metodos de otra clase", "Tambien es llamado vector ", "Es una variable que almacena la dirección de memoria de un objeto", "Mecanismo extensible para agregar información declarativa o metadatos con código "};
-
-    auto itPalabra = listaAdivinaPalabra.begin();
-    auto itPista = listaAdivinaPistas.begin();
-
-    while(itPalabra != listaAdivinaPalabra.end() && itPista != listaAdivinaPistas.end()) {
-        cout << "Palabra: " << *itPalabra << ", Pista: " << *itPista << endl;
-        ++itPalabra;
-        ++itPista;
-    }
-    }
 
 };
 
-void AdivinaPalabra::AgregarAColeccion() {
-    list<string> coleccion;
-    string desicionUsuario;
+ //CLASE HIJA 1 (Adivina la profesion con las pistas de cada uno )
+    class AdivinaProfesion : public AdivinaPalabra{
+        //Nuevos atributos:
+        string nombre = "Adivina la profesion";
+        int añoLanzamiento = 2022;
+        string desarrollador = "Xbox ";
+        string plataforma = "Juegos locos"; 
 
-    cout << "Bienvenido, a su coleccion de videojuegos, si desea agregar un videojuego a su coleccion,\n indique el numero del videojuego que desea agregar a continuacion:" << endl;
-    cout << "1. Adivina la palabra" << endl;
-    cout << "2. Adivina el animal" << endl;
-    cout << "3. Adivina la profesion" << endl;
-    cin >> desicionUsuario;
+    AdivinaProfesion(){};
+    void AdivinaProfesion::JugarAdivinaProfesion();
 
-    coleccion.push_back(desicionUsuario);
+        AdivinaPalabra objeto1;
+        void AdivinaProfesion::JugarAdivinaProfesion();
+        list<string> listaDeProfesion = {"Médico", "Bombero", "Policía", "Profesor", "Pintor"};
+        list<string> listaDePistas = {"Cura a las personas", "Apaga los incendios", "Atrapa a las personas malas y criminales", "Enseña y educa a los niños", "Crea arte en un lienzo"};
+        list<pair<string, string>> asociarElementos = {};
+        AdivinaProfesion ::asociarElementos.sort();
+            for(string i=0; i < listaDePistas.size(); i++){
+                cout << listaDePistas[i] << "es la pista de" << listaDeProfesion[i] << endl;
+            }
 
-    cout << "Su nueva coleecion es " << coleccion.size() << endl;
-}
+    
+    };
 
-string AdivinaPalabra::AsignarCategoria() {
-    string desicionCategoria;
-    list<string> listaJuegos = {"Adivina la palabra", "Adivina el animal", "Adivina la profesion"};
-    list<string> categorias = {"Principiante", "Amateur", "Profesional"};
 
-    cout << "Por favor escoja su categoria: 1. Principiante  2. Amateur  3. Profesional" << endl;
-    cin >> desicionCategoria;
+    // Crear juego 
+        void AdivinaPalabra :: JugarAdivinaProfesion(){
+        string pistaAleatoria(vector<string>& pistas){
+            int general = rand() % pistas.size();
+            return pistas[general];
+        }
+        bool confirmarPalabra(const string& pista, const string& palabra){
+            if (pista == "Cura a las personas" && palabra == "Médico" ){
+                return true; 
+            } else if ( pista == "Apaga los incendios" && palabra == "Bombero" ){
+                return true; 
+            } else if (pista == "Atrapa a las personas malas y criminales" && palabra == "Policía"){
+                return true;
+            } else if (pista == "Enseña y educa a los niños" && palabra == "Profesor"){
+                return true; 
+            } else if (pista == "Crea arte en un lienzo" && palabra == "Pintor"){
+                return true;
+            } else {
+                return false;
+            }
+        }
+            string palabra
+            string pista = pistaAleatoria(pistas); 
+            cout << "PISTA: \n" ; 
+            cin >> pista; 
+            cout << " Escribe la palabra correcta: \n " ; 
+            cin >> palabra;
 
-    cout << "Su categoria es " << desicionCategoria << endl;
+            if (confirmarPalabra(pista, palabra)){
+                cout << " Respuesta correcta. " << endl; 
+            } else {
+                cout << " Respuesta incorrecta. " << endl;
+            }
+            return 0;
+        
+        }
 
-    return desicionCategoria;
-}
-
-string AdivinaPalabra::VideojuegosPorTitulo() {
-    list<string> listaVideojuegos = {"Adivina la palabra", "Adivina el animal", "Adivina la profesion"};
-
-    listaVideojuegos.sort();
-
-    for (const auto& videojuego : listaVideojuegos) {
-        cout << videojuego << endl;
-    }
-
-    return " "; 
-}
-
-int AdivinaPalabra::VideojuegosPorAñoLanzamiento() {
-    // Implementación pendiente
-    return 0;
-}
-
-string AdivinaPalabra::VideojuegosPorPlataforma() {
-    // Implementación pendiente
-    return "";
-}
-
-void AdivinaPalabra::Ordenamiento() {
-    // Implementación pendiente
-}
-
-//CLASE HIJA 1
+//CLASE HIJA 2 (Adivina el animal)
 class AdivinaAnimal : public AdivinaPalabra {
-    list<string> listaAnimales = {"Gato", "Perro", "Caballo", "Leon", "Pajaro"};
-    list<string> listaPistas = {"Es un animal domestico, muy reservado", "Es el mejor amigo del hombre", "Es un animal usado en batalla", "Es el rey de la selva", "Puede volar"};
+
+    //Nuevos atributos:
+        private:
+        string nombre = "Adivina el animal";
+        int añoLanzamiento = 2021;
+        string desarrollador = "Sony ";
+        string plataforma = "juegos.oo"; 
+
+        public:
+        ejecutarJuegoAnimal();
+
+    list<string> listaAnimales = {"Gato", "Perro", "Caballo", "Leon", "Pinguino"};
+    list<string> listaPistas = {"Es un animal domestico, muy reservado", "Es el mejor amigo del hombre", "Es un animal usado en guerras", "Es el rey de la selva", "Es un ave que no vuela"};
     unordered_map<string, string> mapaAnimalesPistas;
 
 public:
@@ -160,7 +177,346 @@ public:
             ++itPista;
         }
     }
+    
 };
+
+    ejecutarJuegoAnimal(){
+        string pistaAleatoria(vector<string>&pistas){
+        int general = rand() % pistas.size();
+        return pistas[general];
+    }
+    bool confirmarPalabra(const string &pista, const string& palabra){
+        if (pista == "Es un animal domestico, muy reservado" && palabra == "Gato" ){
+            return true; 
+        } else if ( pista == "Es el mejor amigo del hombre" && palabra == "Perro" ){
+            return true; 
+        } else if (pista == "Es un animal usado en guerras" && palabra == "Caballo"){
+            return true;
+        } else if (pista == "Es el rey de la selva" && palabra == "Leon"){
+            return true; 
+        } else if (pista == "Es un ave que no vuela" && palabra == "pinguino"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+        string palabra
+        string pista = pistaAleatoria(pistas); 
+        cout << "PISTA: \n" ; 
+        cin >> pista; 
+        cout << " Escribe la palabra correcta: \n " ; 
+        cin >> palabra;
+
+        if (confirmarPalabra(pista, palabra)){
+            cout << " Respuesta correcta. " << endl; 
+        } else {
+            cout << " Respuesta incorrecta. " << endl;
+        }
+        return 0;
+    }
+
+    
+// LISTA MULTILISTA 
+    class ListaMultilista{ 
+        private: 
+            map<string, vector<AdivinaPalabra>>;
+            listaMultilista.sort()
+        public:
+            void ejecutarMultilista();
+            void sumarJuegos(const AdivinaPalabra& juego){
+                listaMultilista[AdivinaPalabra.getcategorias()].push_back(juego);
+            }
+            vector<AdivinaPalabra>;
+            tenerCategoriaAdivinaPalabra(const string& categorias){
+                if (listaMultilisra.find(categorias) != listaMultilista.end()){
+                    return listaMultilista[categorias];
+                } else {
+                    return {};
+                }
+            }
+   
+
+
+    }; 
+        //Funcion que hace que se ejecute la lista.
+        void ejecutarMultilista(){
+            listaMultilista.ponerJuegos(AdivinaPalabra(AdivinaAnimal));
+            listaMultilista.ponerJuegos(AdivinaPalabra(AdivinaProfesion));
+
+        cout << "se eligió el juego: " << AdivinaAnimal << endl;
+        vector<AdivinaPalabra> juegoAdivinaAnimal = listaMultilista.tenerCategoriaAdivinaPalabra(AdivinaAnimal);
+        for (const auto& juego : juegoAdivinaAnimal){
+            cout << " " << juego.getnombre() << endl;
+        }
+        cout << "se eligió el juego: " << AdivinaProfesion << endl;
+        vector<AdivinaPalabra> juegoAdivinaProfesion = listaMultilista.tenerCategoriaAdivinaPalabra(AdivinaProfesion);
+        for (const auto& juego : juegoAdivinaProfesion){
+            cout << " " << juego.getnombre() << endl;
+        }
+        return 0;
+} 
+
+void AdivinaPalabra :: OrdenadorJuegoMasJugado(){
+    bool CompararTiempo (const AdivinaPalabra& v1, const AdivinaPalabra& v2){
+        return v1.gettiempoDeJuego() < v2.gettiempoDeJuego(); 
+    }
+    void ordenarJuegoPorTiempo(vector<AdivinaPalabra>& juegos){
+        sort(juegos.begin(), juegos.end(), CompararPorTiempo);
+    }
+     // REVISAR!!!!
+        int tiempoPalabra; 
+        int tiempoAnimal;
+        int tiempoProfesion;
+        vector<AdivinaPalabra> juegos; 
+        cout << "Ingrese el tiempo en minutos de la partida en el juego Adivina la palabra: " ; 
+        cin >> tiempoPalabra; 
+        cout << "Ingrese el tiempo en minutos de la partida en el juego Adivina el animal: " ; 
+        cin >> tiempoProfesion; 
+        cout << "Ingrese el tiempo en minutos de la partida en el juego Adivina la profesion: " ; 
+        cin >> tiempoAnimal; 
+
+            if (tiempoPalabra < tiempoAnimal < tiempoProfesion){
+                cout << "El orden de tiempo de partida en los juegos de menor a mayor es: Adivina la palabra, adivina el animal y adivina la profesión" << endl;    
+            } else 
+
+
+            // PENDIENTE!!!!
+        cout << "Los juegos ordenados de menor a mayor tiempo: " << endl; 
+            for (const auto& juego : juegos){ 
+                cout << " El orden de los juegos " << juego.getnombre() << " es de " << juego.gettiempoDeJuego() << " minutos. " << endl;
+            }
+        return 0;
+}
+
+AdivinaPalabra Juegos;
+AdivinaPalabra juegos;
+
+void AdivinaPalabra::AgregarAColeccion(){
+    list<string> coleccion;
+    string desicionUsuario;
+
+    cout << "Bienvenido, a su coleccion de videojuegos, si desea agregar un videojuego a su coleccion,\n indique el numero del videojuego que desea agregar a continuacion:" << endl;
+    cout << "1. Adivina la palabra" << endl;
+    cout << "2. Adivina el animal" << endl;
+    cout << "3. Adivina la profesion" << endl;
+    cin >> desicionUsuario;
+
+    coleccion.push_back(desicionUsuario);
+
+    cout << "Su nueva coleecion es " << coleccion << endl;
+}
+
+string AdivinaPalabra::AsignarCategoria(){
+    string desicionCategoria;
+    list<string> listaJuegos = {"Adivina la palabra", "Adivina el animal", "Adivina la profesion"};
+    list<string> categorias = {"Principiante", "Amateur", "Profesional"};
+
+    cout << "Por favor escoja su categoria: 1. Principiante  2. Amateur  3. Profesional" << endl;
+    cin >> desicionCategoria;
+
+    cout << "Su categoria es " << desicionCategoria << endl;
+
+    return desicionCategoria;
+}
+
+ // Crear el juego
+void AdivinaPalabra::jugarAdivinaPalabra(){
+    
+    void AdivinaPalabra :: JugarAdivinaPalabra( ){
+    string pistaAleatoria(vector<string>&pistas){
+        int general = rand() % pistas.size();
+        return pistas[general];
+    }
+    bool confirmarPalabra(const string &pista, const string& palabra){
+        if (pista == "permite acceder a información de manera ordenada a través de campos clave" && palabra == "multilistas" ){
+            return true; 
+        } else if ( pista == "Que una clase hija tome los atributos y métodos de otra clase" && palabra == "herencia" ){
+            return true; 
+        } else if (pista == "También es llamado vector" && palabra == "arreglos"){
+            return true;
+        } else if (pista == "Es una variable que almacena la dirección de memoria de un objeto" && palabra == "puntero"){
+            return true; 
+        } else if (pista == "Mecanismo extensible para agregar información declarativa o datos de código" && palabra == "atributos"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+        string palabra
+        string pista = pistaAleatoria(pistas); 
+        cout << "PISTA: \n" ; 
+        cin >> pista; 
+        cout << " Escribe la palabra correcta: \n " ; 
+        cin >> palabra;
+
+        if (confirmarPalabra(pista, palabra)){
+            cout << " Respuesta correcta. " << endl; 
+        } else {
+            cout << " Respuesta incorrecta. " << endl;
+        }
+        return 0;
+    }
+    }
+
+
+
+// Ordenar por titulo 
+    string AdivinaPalabra::PorTitulo(){
+        bool comparacionDeTitulo(const AdivinaPalabra& v1, const AdivinaPalabra& v2){
+            return v1.getnombre() < v2.getnombre();
+        }
+        void OrdenarPorTitulo(vector<AdivinaPalabra>& juegos){
+            sort(juegos.begin(), juegos.end(), comparacionDeTitulo());
+        }
+        
+            vector<AdivinaPalabra> juegos; 
+            juegos.push_back(AdivinaPalabra("AdivinaPalabra"));
+            juegos.push_back(AdivinaPalabra("AdivinaAnimal"));
+            juegos.push_back(AdivinaPalabra("AdivinaProfesion"));
+
+            OrdenarPorTitulo(juegos);
+            cout << "Los videojuegos ordenados por titulo: " << endl;
+            for (const auto& juego : juegos){
+                cout << " " << juego.getnombre() << endl;
+            }
+            return 0;
+        }
+    
+//Funcion para ordenar por año de lanzamiento
+int AdivinaPalabra:: PorAñoLanzamiento(){
+        map<int, set<Juegos>> 
+        listaPorAñoLanzamiento.sort();
+            for (const auto& juegos : Juegos){
+                listaPorAñoLanzamiento[juego.getAnioLanzamiento()].insert(Juegos);
+            }
+
+    }
+// Funcion para ordenar por plataforma
+    string AdivinaPalabra::PorPlataforma(){
+        map<string, set<Juegos>> 
+        listaPorPlataforma.sort();
+            for (const set<Juegos>& juegos){
+                cout << juegos << endl;
+            }
+    }
+
+//Lita de favoritos, como agregarlo y muestra la lista:
+    string AdivinaPalabra::listaDeFavoritos(){
+    int desicionJugador;
+    string desicionFavoritos;
+    
+    cout << "Para usar el jugador 1, pulsa el numero 1" << endl;
+    cout << "Para usar el jugador 2, pulsa el numero 2" << endl;
+    cin >> desicionJugador;
+
+    if (desicionJugador == 1){
+        cout << "Usted ha seleccionado el jugador uno \n" << endl;
+
+    list<string> listaVideojuegos = {"Adivina la palabra", "Adivina el animal", "Adivina la profesion"};
+    unordered_map<string, int> mapaVideojuegos;
+
+    // Asignando valores numéricos a cada string
+    int valor = 1;
+    for (const auto& videojuego : listaVideojuegos) {
+        mapaVideojuegos[videojuego] = valor++;
+    }
+     cout << "Usted ha seleccionado el jugador uno" << endl;
+        cout << "A continuacion indique el nombre de su juego favorito " << endl;
+        cout << "1. Adivina la palabra" << endl;
+        cout << "2. Adivina el animal" << endl;
+        cout << "3. Adivina la profesion" << endl;
+        cin >> desicionFavoritos;
+
+    list<string> juegosFavoritos ={};
+
+    juegosFavoritos.push_back(desicionFavoritos);
+
+    cout << "Su nueva coleecion es " << juegosFavoritos << endl;
+}
+    
+    if (desicionJugador == 2){
+        cout << "Usted ha seleccionado el jugador dos" << endl;
+        cout << "A continuacion indique el nombre de su juego favorito " << endl;
+        cout << "1. Adivina la palabra" << endl;
+        cout << "2. Adivina el animal" << endl;
+        cout << "3. Adivina la profesion" << endl;
+        cin >> desicionFavoritos;
+
+
+    list<string> juegosFavoritos ={};
+
+    juegosFavoritos.push_back(desicionFavoritos);
+
+    cout << "Su nueva coleecion es " << juegosFavoritos << endl;
+}
+}
+
+//MENU 
+    void AdivinaPalabra :: ejecutarMenu(){
+    int opcionDelJugador; 
+
+    do {
+        cout << "Menú: \n" << endl; 
+        cout << " 1- Adivina la palabra \n" << endl; 
+        cout << " 2- Adivina el animal \n" << endl; 
+        cout << " 3- Adivina la profesión \n" << endl; 
+        cout << " 4- Poner en favoritos \n" << endl; 
+        cout << " 5- Buscar videojuego por plataforma " << endl;
+        cout << " 6- Buscar videojuego por año de Lanzamiento " << endl;
+        cout << " 7- Buscar videojuego por titulo " << endl;
+        cout << " 8- Salir \n" << endl; 
+        cin >> opcionDelJugador; 
+
+        switch (opcionDelJugador) {
+            case 1:
+            { 
+                JugarAdivinaPalabra();
+                break;
+            }
+            case 2:
+            { 
+                JugarAdivinaAnimal();
+                break;
+            }
+            case 3:
+            { 
+                JugarAdivinaProfesion();
+                break;
+            }
+            case 4: 
+            {
+                list<string> juegosFavoritos;
+                string juegoElegido;
+                cout << " Nombre del juego que quieres poner en favoritos:  \n " << endl; 
+                cin >> juegoElegido; 
+                juegosFavoritos (juegosFavoritos, juegoElegido);
+                break;
+            }
+            case 5:
+            {
+                PorPlataforma();
+                break;
+            }
+            case 6:
+            {
+                PorAñoLanzamiento();
+                break;
+            }
+            case 7:
+            {
+                PorTitulo();
+                break;
+            }
+            case 8:
+            { 
+                cout << " Salindo del videojuego..." << endl; 
+                break;
+            }    
+        }
+    } 
+    while ( opcionDelJugador != 5); // repite el menú hasta que el usuario elija salir
+    return 0;
+    }
 
 
 int main() {
